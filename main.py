@@ -1,3 +1,36 @@
+import sys
+from stats import get_num_words, char_count, char_by_appearances
+
+def get_book_text(path_to_file):
+    with open(path_to_file) as f:
+        file_contents= f.read()
+    return(file_contents)
+
+def main():
+    arguments = sys.argv  # List of arguments   
+    script_name = sys.argv[0]  # Name of the script   
+    # Checking if an argument is provided before accessing it   
+    if len(sys.argv) != 2:   
+       print(f"Usage: python3 main.py <path_to_book>")
+       sys.exit(1)
+    else:   
+        bookpath = sys.argv[1] 
+    bookstring = get_book_text(bookpath)
+    chardict = char_count(bookstring)
+    appearances = char_by_appearances(chardict)
+    i=0
+
+
+    print(f"============ BOOKBOT ============")
+    print(f"Analyzing book found at {bookpath}..."+"\n"+"----------- Word Count ----------")
+    print(f"Found {get_num_words(bookstring)} total words"+"\n"+"--------- Character Count -------")
+    for i in range(0, len(appearances)):
+        dicti=appearances[i]
+
+        print(f"{dicti["String"]}: {dicti["Integer"]}")
+    print(f"============= END ===============")
+
+""""
 def copy():
     with open("books/frankenstein.txt") as f:
         file_contents = f.read()
@@ -38,5 +71,6 @@ def main():
     ordered= list_iterations(dico)
     for a in ordered:
         print(f"{a} found {ordered[a]} times in the document")
-
+"""
 main()
+
